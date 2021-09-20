@@ -17,15 +17,15 @@ module.exports = {
      * @param {*} param3
      */
     run: async (client, message, args, { GuildDB }) => {
-        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if(!message.member.voice.channel.permissionsFor(message.guild.me).has("CREATE_INSTANT_INVITE"))return client.sendTime(message.channel, "❌ | **Tao đéo có quyền mời**");
+        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
+        if(!message.member.voice.channel.permissionsFor(message.guild.me).has("CREATE_INSTANT_INVITE"))return client.sendTime(message.channel, "❌ | **Không có quyền mời**");
 
         let Invite = await message.member.voice.channel.activityInvite("755600276941176913")//Made using discordjs-activity package
         let embed = new MessageEmbed()
         .setAuthor("YouTube Together", "https://cdn.discordapp.com/emojis/749289646097432667.png?v=1")
         .setColor("#FF0000")
         .setDescription(`
-Dùng **YouTube Together** Mày có thể xem youtube cùng người khác trong room voice. Click *Join YouTube Together* để vào!
+Dùng **YouTube Together**  có thể xem youtube cùng người khác trong room voice. Click *Join YouTube Together* để vào!
 
 __**[Join YouTube Together](https://discord.com/invite/${Invite.code})**__
 
@@ -47,15 +47,15 @@ __**[Join YouTube Together](https://discord.com/invite/${Invite.code})**__
             const guild = client.guilds.cache.get(interaction.guild_id);
             const member = guild.members.cache.get(interaction.member.user.id);
 
-            if (!member.voice.channel) return client.sendTime(interaction, "❌ | Vào room voice rồi gọi tao.");
-            if(!member.voice.channel.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE"))return client.sendTime(interaction, "❌ | **Tao đéo có quyền mời**");
+            if (!member.voice.channel) return client.sendTime(interaction, "❌ | Vào room voice rồi gọi.");
+            if(!member.voice.channel.permissionsFor(guild.me).has("CREATE_INSTANT_INVITE"))return client.sendTime(interaction, "❌ | **Không có quyền mời**");
 
             let Invite = await member.voice.channel.activityInvite("755600276941176913")//Made using discordjs-activity package
             let embed = new MessageEmbed()
             .setAuthor("YouTube Together", "https://cdn.discordapp.com/emojis/749289646097432667.png?v=1")
             .setColor("#FF0000")
             .setDescription(`
-Dùng **YouTube Together** Mày có thể xem youtube cùng người khác trong room voice. Click *Join YouTube Together* để vào!
+Dùng **YouTube Together**  có thể xem youtube cùng người khác trong room voice. Click *Join YouTube Together* để vào!
 
 __**[Join YouTube Together](https://discord.com/invite/${Invite.code})**__
 

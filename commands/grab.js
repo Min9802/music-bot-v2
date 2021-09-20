@@ -3,7 +3,7 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   name: "grab",
-  description: "Lưu bài hát vào tin nhắn của mày",
+  description: "Lưu bài hát vào tin nhắn",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -19,9 +19,9 @@ module.exports = {
 */
 run: async (client, message, args, { GuildDB }) => {
   let player = await client.Manager.get(message.guild.id);
-  if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
-  if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+  if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
+  if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
    message.author.send(new MessageEmbed()
    .setAuthor(`Song saved`, client.user.displayAvatarURL({
     dynamic: true
@@ -39,10 +39,10 @@ run: async (client, message, args, { GuildDB }) => {
     dynamic: true
   }))
     ).catch(e=>{
-      return message.channel.send("**:x: Tin nhắn của mày đã bị tắt**")
+      return message.channel.send("**:x: Tin nhắn đã bị tắt**")
     })    
 
-    client.sendTime(message.channel, "✅ | **Kiểm tra Tin nhắn của mày!**")
+    client.sendTime(message.channel, "✅ | **Kiểm tra Tin nhắn đi!**")
   },
   SlashCommand: {
 /**
@@ -57,9 +57,9 @@ run: async (client, message, args, { GuildDB }) => {
     const user = client.users.cache.get(interaction.member.user.id);
     const member = guild.members.cache.get(interaction.member.user.id);
     let player = await client.Manager.get(interaction.guild_id);
-    if (!player) return client.sendTime(interaction, "❌ | **Đéo có bài nào...**");
-    if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-    if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+    if (!player) return client.sendTime(interaction, "❌ | **Không có bài nào...**");
+    if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi.**");
+    if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
     try{
     let embed = new MessageEmbed()
       .setAuthor(`Song saved: `, client.user.displayAvatarURL())
@@ -78,10 +78,10 @@ run: async (client, message, args, { GuildDB }) => {
       }))
       user.send(embed);
     }catch(e) {
-      return client.sendTime(interaction, "**:x: Tin nhắn của mày đã bị tắt**")
+      return client.sendTime(interaction, "**:x: Tin nhắn đã bị tắt**")
     }
 
-    client.sendTime(interaction, "✅ | **Kiểm tra tin nhắn của mày!**")
+    client.sendTime(interaction, "✅ | **Kiểm tra tin nhắn đi!**")
   },
   },
 };

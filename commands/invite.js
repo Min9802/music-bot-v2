@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "invite",
-  description: "Để mời tao vào",
+  description: "Để mời tôi vào",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -45,12 +45,12 @@ module.exports = {
   run: async (client, interaction, args, { GuildDB }) => {
     let embed = new MessageEmbed()
       .setAuthor(
-        "Để mời " + client.user.tag + " Vào server của mày!",
+        "Để mời " + client.user.tag + " Vào server!",
         client.user.displayAvatarURL()
       )
       .setColor("BLUE")
       .setDescription(
-        `Mày có thể mời bằng cách nhấp vào [here](https://discord.com/oauth2/authorize?client_id=${
+        `Có thể mời bằng cách nhấp vào [here](https://discord.com/oauth2/authorize?client_id=${
           client.botconfig.ClientID
         }&permissions=${
           client.botconfig.Permissions

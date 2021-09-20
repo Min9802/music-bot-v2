@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "disconnect",
-  description: "Đuổi tao thì dùng cái này",
+  description: "Đuổi tôi thì dùng cái này",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -18,9 +18,9 @@ module.exports = {
    */
   run: async (client, message, args, { GuildDB }) => {
     let player = await client.Manager.get(message.guild.id);
-    if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao**");
-    if (!player) return client.sendTime(message.channel,"❌ | **Đéo có bài nào...**");
-    await client.sendTime(message.channel,":notes: | **Đuổi thì tao đi!**");
+    if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi**");
+    if (!player) return client.sendTime(message.channel,"❌ | **Không có bài nào...**");
+    await client.sendTime(message.channel,":notes: | **Đuổi thì đi!**");
     await message.react("✅");
     player.destroy();
   },
@@ -40,7 +40,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **Vào room voice rồi gọi tao.**"
+          "❌ | **Vào room voice rồi gọi.**"
         );
       if (
         guild.me.voice.channel &&
@@ -55,12 +55,12 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Đéo có bài nào...**"
+          "❌ | **Không có bài nào...**"
         );
       player.destroy();
       client.sendTime(
         interaction,
-        ":notes: | **Đuổi thì tao đi!**"
+        ":notes: | **Đuổi thì đi!**"
       );
     },
   },

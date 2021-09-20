@@ -19,10 +19,10 @@ module.exports = {
      */
     run: async (client, message, args, { GuildDB }) => {
         let player = await client.Manager.get(message.guild.id);
-        if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
+        if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
         if (!args[0]) return client.sendTime(message.channel, `🔉 | Âm lượng hiện tại \`${player.volume}\`.`);
-        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice  mới được dùng lệnh!**");
         if (!parseInt(args[0])) return client.sendTime(message.channel, `**Chọn một số giữa** \`1 - 100\``);
         let vol = parseInt(args[0]);
         player.setVolume(vol);
@@ -49,10 +49,10 @@ module.exports = {
             const guild = client.guilds.cache.get(interaction.guild_id);
             const member = guild.members.cache.get(interaction.member.user.id);
 
-            if (!member.voice.channel) return client.sendTime(interaction, "❌ | Vào room voice rồi gọi tao.");
-            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+            if (!member.voice.channel) return client.sendTime(interaction, "❌ | Vào room voice rồi gọi.");
+            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice  mới được dùng lệnh!**");
             let player = await client.Manager.get(interaction.guild_id);
-            if (!player) return client.sendTime(interaction, "❌ | **Đéo có bài nào...**");
+            if (!player) return client.sendTime(interaction, "❌ | **Không có bài nào...**");
             if (!args[0].value) return client.sendTime(interaction, `🔉 | Âm lượng hiện tại \`${player.volume}\`.`);
             let vol = parseInt(args[0].value);
             if (!vol || vol < 1 || vol > 100) return client.sendTime(interaction, `**Chọn 1 số giữa** \`1 - 100\``);

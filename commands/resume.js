@@ -19,9 +19,9 @@ module.exports = {
      */
     run: async (client, message, args, { GuildDB }) => {
         let player = await client.Manager.get(message.guild.id);
-        if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
-        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+        if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
+        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi !**");
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
 
         if (player.playing) return client.sendTime(message.channel, "❌ | **Nhạc đã tiếp tục phát!**");
         player.pause(false);
@@ -41,10 +41,10 @@ module.exports = {
             const member = guild.members.cache.get(interaction.member.user.id);
 
             if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
 
             let player = await client.Manager.get(interaction.guild_id);
-            if (!player) return client.sendTime(interaction, "❌ | **Đéo có bài nào...**");
+            if (!player) return client.sendTime(interaction, "❌ | **Không có bài nào...**");
             if (player.playing) return client.sendTime(interaction, "❌ | **Nhạc đã tiếp tục phát!**");
             player.pause(false);
             client.sendTime(interaction, "**⏯ Resumed!**");

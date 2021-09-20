@@ -19,14 +19,14 @@ module.exports = {
      * @param {*} param3
      */
     run: async (client, message, args, { GuildDB }) => {
-        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
         let SearchString = args.join(" ");
         if (!SearchString) return client.sendTime(message.channel, `**Usage - **\`${GuildDB.prefix}play [song]\``);
         let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
         let Searching = await message.channel.send(":mag_right: Tao đang tìm...");
         if (!CheckNode || !CheckNode.connected) {
-       return client.sendTime(message.channel,"❌ | **Server sập rồi. Gọi thằng min fix**");
+       return client.sendTime(message.channel,"❌ | **Server sập rồi. Gọi thằng Min fix**");
         }
         const player = client.Manager.create({
             guild: message.guild.id,
@@ -37,7 +37,7 @@ module.exports = {
 
         let SongAddedEmbed = new MessageEmbed().setColor("RANDOM");
 
-        if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
+        if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
 
         if (player.state != "CONNECTED") await player.connect();
 
@@ -66,13 +66,13 @@ module.exports = {
                     if (player.queue.totalSize > 1) SongAddedEmbed.addField("Vị trí trong hàng chờ", `${player.queue.size - 0}`, true);
                     Searching.edit(SongAddedEmbed);
                 } else {
-                    return client.sendTime(message.channel, "**Đéo tìm được - **" + SearchString);
+                    return client.sendTime(message.channel, "**Không tìm được - **" + SearchString);
                 }
             } else {
                 let Searched = await player.search(SearchString, message.author);
-                if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
+                if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
 
-                if (Searched.loadType === "NO_MATCHES") return client.sendTime(message.channel, "**Đéo tìm được - **" + SearchString);
+                if (Searched.loadType === "NO_MATCHES") return client.sendTime(message.channel, "**Không tìm được - **" + SearchString);
                 else if (Searched.loadType == "PLAYLIST_LOADED") {
                     player.queue.add(Searched.tracks);
                     if (!player.playing && !player.paused && player.queue.totalSize === Searched.tracks.length) player.play();
@@ -97,7 +97,7 @@ module.exports = {
             }
         } catch (e) {
             console.log(e);
-            return client.sendTime(message.channel, "**Đéo tìm được - **" + SearchString);
+            return client.sendTime(message.channel, "**Không tìm được - **" + SearchString);
         }
     },
 
@@ -124,10 +124,10 @@ module.exports = {
             const voiceChannel = member.voice.channel;
             let awaitchannel = client.channels.cache.get(interaction.channel_id); /// thanks Reyansh for this idea ;-;
             if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
             let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
             if (!CheckNode || !CheckNode.connected) {
-              return client.sendTime(interaction,"❌ | **Server sập rồi. Gọi thằng min fix. Gọi thằng min fix**");
+              return client.sendTime(interaction,"❌ | **Server sập rồi. Gọi thằng Min fix. Gọi thằng min fix**");
             }
     
             let player = client.Manager.create({
@@ -148,11 +148,11 @@ module.exports = {
                 switch (Searched.loadType) {
                     case "LOAD_FAILED":
                         if (!player.queue.current) player.destroy();
-                        return client.sendError(interaction, `❌ | **Lỗi, đéo tìm được**`);
+                        return client.sendError(interaction, `❌ | **Lỗi, Không tìm được**`);
 
                     case "NO_MATCHES":
                         if (!player.queue.current) player.destroy();
-                        return client.sendTime(interaction, "❌ | **Đéo có bài nào.**");
+                        return client.sendTime(interaction, "❌ | **Không có bài nào.**");
                     case "TRACK_LOADED":
                         player.queue.add(TrackUtils.build(Searched.tracks[0], member.user));
                         if (!player.playing && !player.paused && !player.queue.length) player.play();
@@ -192,15 +192,15 @@ module.exports = {
                     res = await player.search(search, member.user);
                     if (res.loadType === "LOAD_FAILED") {
                         if (!player.queue.current) player.destroy();
-                        return client.sendError(interaction, `:x: | **Lỗi đéo tìm được**`);
+                        return client.sendError(interaction, `:x: | **Lỗi Không tìm được**`);
                     }
                 } catch (err) {
-                    return client.sendError(interaction, `Lỗi đéo tìm được: ${err.message}`);
+                    return client.sendError(interaction, `Lỗi Không tìm được: ${err.message}`);
                 }
                 switch (res.loadType) {
                     case "NO_MATCHES":
                         if (!player.queue.current) player.destroy();
-                        return client.sendTime(interaction, "❌ | **Đéo tìm được.**");
+                        return client.sendTime(interaction, "❌ | **Không tìm được.**");
                     case "TRACK_LOADED":
                         player.queue.add(res.tracks[0]);
                         if (!player.playing && !player.paused && !player.queue.length) player.play();

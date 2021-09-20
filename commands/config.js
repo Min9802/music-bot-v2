@@ -23,7 +23,7 @@ module.exports = {
       .addField("Prefix", GuildDB.prefix, true)
       .addField("DJ Role", GuildDB.DJ ? `<@&${GuildDB.DJ}>` : "Not Set", true)
       .setDescription(`
-Mày muốn sửa gì?
+Bạn muốn sửa gì?
 
 :one: - Server Prefix
 :two: - DJ Role
@@ -40,7 +40,7 @@ Mày muốn sửa gì?
     ).catch(() => {
       ConfigMessage.reactions.removeAll();
       client.sendTime(
-        message.channel, "❌ | **Mày đã phí của tao mấy phút. Đmm!**"
+        message.channel, "❌ | **Bạn đã phí của tôi mấy phút!**"
       );
       ConfigMessage.delete(Config);
     });
@@ -55,13 +55,13 @@ Mày muốn sửa gì?
     let em = emoji;
     ConfigMessage.reactions.removeAll();
     if (em._emoji.name === "1️⃣") {
-      await client.sendTime(message.channel, "Mày muốn sửa lệnh gọi tao thành ký tự gì?");
+      await client.sendTime(message.channel, "bạn muốn sửa lệnh gọi tôi thành ký tự gì?");
       let prefix = await message.channel.awaitMessages(
         (msg) => msg.author.id === message.author.id,
         { max: 1, time: 30000, errors: ["time"] }
       );
       if (!prefix.first())
-        return client.sendTime(message.channel, "Mày đã phí của tao mấy phút.");
+        return client.sendTime(message.channel, "bạn đã phí của tôi mấy phút.");
       prefix = prefix.first();
       prefix = prefix.content;
 
@@ -71,7 +71,7 @@ Mày muốn sửa gì?
       });
 
       client.sendTime(
-        message.channel, `Tao đã đổi ký tự thành  \`${prefix}\``
+        message.channel, `Tôi đã đổi ký tự thành  \`${prefix}\``
       );
     } else {
       await client.sendTime(
@@ -82,7 +82,7 @@ Mày muốn sửa gì?
         { max: 1, time: 30000, errors: ["time"] }
       );
       if (!role.first())
-        return client.sendTime(message.channel, "Mày đã phí của tao mấy phút.");
+        return client.sendTime(message.channel, "Bạn đã phí của tôi mấy phút.");
       role = role.first();
       if (!role.mentions.roles.first())
         return client.sendTime(
@@ -96,7 +96,7 @@ Mày muốn sửa gì?
       });
 
       client.sendTime(
-        message.channel, "Tao đã lưu role DJ thành <@&" + role.id + ">"
+        message.channel, "Tôi đã lưu role DJ thành <@&" + role.id + ">"
       );
     }
   },
@@ -155,10 +155,10 @@ Mày muốn sửa gì?
             prefix: prefix,
             DJ: GuildDB.DJ,
           });
-          client.sendTime(interaction, `Ký tự gọi tao đã đặt thành \`${prefix}\``);
+          client.sendTime(interaction, `Ký tự gọi tôi đã đặt thành \`${prefix}\``);
         } else {
           //has not prefix
-          client.sendTime(interaction, `Ký tự gọi tao của máy chủ này là \`${GuildDB.prefix}\``);
+          client.sendTime(interaction, `Ký tự gọi tôi của máy chủ này là \`${GuildDB.prefix}\``);
         }
       } else if (config === "djrole") {
         //DJ role

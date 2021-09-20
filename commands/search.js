@@ -23,9 +23,9 @@ module.exports = {
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **Vào room voice rồi gọi tao!**"
+        "❌ | **Vào room voice rồi gọi!**"
       );
-      if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+      if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice  mới được dùng lệnh!**");
 
     let SearchString = args.join(" ");
     if (!SearchString)
@@ -37,7 +37,7 @@ module.exports = {
     if (!CheckNode || !CheckNode.connected) {
       return client.sendTime(
         message.channel,
-        "❌ | **Server sập rồi. Gọi thằng min fix**"
+        "❌ | **Server sập rồi. Gọi thằng Min fix**"
       );
     }
     const player = client.Manager.create({
@@ -53,7 +53,7 @@ module.exports = {
     if (Searched.loadType == "NO_MATCHES")
       return client.sendTime(
         message.channel,
-        "Đéo tìm được " + SearchString
+        "Không tìm được " + SearchString
       );
     else {
       Searched.tracks = Searched.tracks.map((s, i) => {
@@ -108,7 +108,7 @@ module.exports = {
       if (!parseInt(SongIDmsg.content))
         return client.sendTime(message.channel, "Nhập ID cho đúng mày !");
       let Song = Searched.tracks[parseInt(SongIDmsg.content) - 1];
-      if (!Song) return client.sendTime(message.channel, "Đéo có bài nào như thế !");
+      if (!Song) return client.sendTime(message.channel, "Không có bài nào như thế !");
       player.queue.add(Song);
       if (!player.playing && !player.paused && !player.queue.size)
         player.play();
@@ -160,7 +160,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **Vào room voice rồi gọi tao.**"
+          "❌ | **Vào room voice rồi gọi.**"
         );
       if (
         guild.me.voice.channel &&
@@ -168,13 +168,13 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**"
+          ":x: | **Vào cùng room voice  mới được dùng lệnh!**"
         );
       let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
       if (!CheckNode || !CheckNode.connected) {
         return client.sendTime(
           interaction,
-          "❌ | **Server sập rồi. Gọi thằng min fix**"
+          "❌ | **Server sập rồi. Gọi thằng Min fix**"
         );
       }
       let player = client.Manager.create({
@@ -195,11 +195,11 @@ module.exports = {
         switch (Searched.loadType) {
           case "LOAD_FAILED":
             if (!player.queue.current) player.destroy();
-            return client.sendError(interaction, `:x: | **Đéo tìm được**`);
+            return client.sendError(interaction, `:x: | **Không tìm được**`);
 
           case "NO_MATCHES":
             if (!player.queue.current) player.destroy();
-            return client.sendTime(interaction, ":x: | **Đéo tìm được**");
+            return client.sendTime(interaction, ":x: | **Không tìm được**");
           case "TRACK_LOADED":
             player.queue.add(TrackUtils.build(Searched.tracks[0], member.user));
             if (!player.playing && !player.paused && !player.queue.length)
@@ -233,13 +233,13 @@ module.exports = {
           }
         } catch (err) {
           return client.sendTime(
-            interaction, `:x: | **Đéo tìm được:** ${err.message}`
+            interaction, `:x: | **Không tìm được:** ${err.message}`
           );
         }
         switch (res.loadType) {
           case "NO_MATCHES":
             if (!player.queue.current) player.destroy();
-            return client.sendTime(interaction, ":x: | **Đéo tìm được**");
+            return client.sendTime(interaction, ":x: | **Không tìm được**");
           case "TRACK_LOADED":
             player.queue.add(res.tracks[0]);
             if (!player.playing && !player.paused && !player.queue.length)
@@ -303,7 +303,7 @@ module.exports = {
 
             if (first.toLowerCase() === "cancel") {
               if (!player.queue.current) player.destroy();
-              return awaitchannel.send("Đéo tìm nữa.");
+              return awaitchannel.send("Không tìm nữa.");
             }
 
             const index = Number(first) - 1;

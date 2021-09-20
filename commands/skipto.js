@@ -25,14 +25,14 @@ module.exports = {
       selfDeafen: false,
     });
 
-    if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
-    if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
+    if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
+    if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
     if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
 
     try {
       if (!args[0]) return client.sendTime(message.channel, `**Dùng**: \`${GuildDB.prefix}skipto [number]\``);
       //if the wished track is bigger then the Queue Size
-      if (Number(args[0]) > player.queue.size) return client.sendTime(message.channel, `❌ | Bài hát đó đéo có trong hàng đợi! Nhìn lại đi tml!`);
+      if (Number(args[0]) > player.queue.size) return client.sendTime(message.channel, `❌ | Bài hát đó Không có trong hàng đợi! Nhìn lại đi tml!`);
       //remove all tracks to the jumped song
       player.queue.remove(0, Number(args[0]) - 1);
       //stop the player
@@ -66,8 +66,8 @@ module.exports = {
       const member = guild.members.cache.get(interaction.member.user.id);
       const voiceChannel = member.voice.channel;
       let awaitchannel = client.channels.cache.get(interaction.channel_id); /// thanks Reyansh for this idea ;-;
-      if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-      if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, `:x: | **Vào cùng room voice của tao mới được dùng lệnh!**`);
+      if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi.**");
+      if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, `:x: | **Vào cùng room voice mới được dùng lệnh!**`);
       let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
       if (!CheckNode || !CheckNode.connected) {
         return client.sendTime(interaction, "❌ | **Server sập rồi**");
@@ -84,14 +84,14 @@ module.exports = {
         if (!interaction.data.options) return client.sendTime(interaction, `**Dùng**: \`${GuildDB.prefix}skipto <number>\``);
         let skipTo = interaction.data.options[0].value;
         //if the wished track is bigger then the Queue Size
-        if (skipTo !== null && (isNaN(skipTo) || skipTo < 1 || skipTo > player.queue.length)) return client.sendTime(interaction, `❌ | Bài hát đó đéo có trong hàng đợi! Nhìn lại đi tml!`);
+        if (skipTo !== null && (isNaN(skipTo) || skipTo < 1 || skipTo > player.queue.length)) return client.sendTime(interaction, `❌ | Bài hát đó Không có trong hàng đợi! Nhìn lại đi tml!`);
 
         player.stop(skipTo);
         //Send Success Message
         return client.sendTime(interaction, `⏭ Skipped \`${Number(skipTo)}\` songs`);
       } catch (e) {
         console.log(String(e.stack).bgRed);
-        client.sendError(interaction, "Đéo biết lỗi gì, Bảo thằng Min fix đi.");
+        client.sendError(interaction, "Không biết lỗi gì, Bảo thằng Min fix đi.");
       }
     },
   },

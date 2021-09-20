@@ -19,9 +19,9 @@ module.exports = {
      */
     run: async (client, message, args, { GuildDB }) => {
         let player = await client.Manager.get(message.guild.id);
-        if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
+        if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
         if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
         player.stop();
         await message.react("✅");
     },
@@ -38,15 +38,15 @@ module.exports = {
             const member = guild.members.cache.get(interaction.member.user.id);
 
             if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+            if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
 
             const skipTo = interaction.data.options ? interaction.data.options[0].value : null;
 
             let player = await client.Manager.get(interaction.guild_id);
 
-            if (!player) return client.sendTime(interaction, "❌ | **Đéo có bài nào...**");
+            if (!player) return client.sendTime(interaction, "❌ | **Không có bài nào...**");
             console.log(interaction.data);
-            if (skipTo !== null && (isNaN(skipTo) || skipTo < 1 || skipTo > player.queue.length)) return client.sendTime(interaction, "❌ | **Số sai. đéo Skip được!**");
+            if (skipTo !== null && (isNaN(skipTo) || skipTo < 1 || skipTo > player.queue.length)) return client.sendTime(interaction, "❌ | **Số sai. Không Skip được!**");
             player.stop(skipTo);
             client.sendTime(interaction, "**Skipped!**");
         },

@@ -21,9 +21,9 @@ const { TrackUtils } = require("erela.js");
   run: async (client, message, args, { GuildDB }) => {
     let player = await client.Manager.players.get(message.guild.id);
     const song = player.queue.slice(args[0] - 1, 1); 
-    if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
-    if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-    if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+    if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
+    if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
+    if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
         
     if (!player.queue || !player.queue.length || player.queue.length === 0)
       return message.channel.send("Không có gì trong hàng chờ để xóa");
@@ -59,12 +59,12 @@ const { TrackUtils } = require("erela.js");
       const guild = client.guilds.cache.get(interaction.guild_id);
       const member = guild.members.cache.get(interaction.member.user.id);
       const song = player.queue.slice(args[0] - 1, 1);
-      if (!player) return client.sendTime(interaction, "❌ | **Đéo có bài nào...**");
-      if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-      if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+      if (!player) return client.sendTime(interaction, "❌ | **Không có bài nào...**");
+      if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi.**");
+      if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
   
       if (!player.queue || !player.queue.length || player.queue.length === 0)
-      return client.sendTime("❌ | **Đéo có bài nào...**");
+      return client.sendTime("❌ | **Không có bài nào...**");
       let rm = new MessageEmbed()
         .setDescription(`✅ | **Đã xóa** \`${Number(args[0])}\` Khỏi hàng chờ!`)
         .setColor("GREEN")

@@ -19,9 +19,9 @@ module.exports = {
      */
     run: async (client, message, args, { GuildDB }) => {
         let player = await client.Manager.get(message.guild.id);
-        if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
-        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+        if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
+        if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi!**");
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice  mới được dùng lệnh!**");
         if (!player.queue.current.isSeekable) return client.sendTime(message.channel, "❌ | **Tao không tìm được!**");
         let SeekTo = client.ParseHumanTime(args.join(" "));
         if (!SeekTo) return client.sendTime(message.channel, `**Dùng - **\`${GuildDB.prefix}seek <number s/m/h>\` \n**Ví dụ - **\`${GuildDB.prefix}seek 2m 10s\``);
@@ -50,7 +50,7 @@ module.exports = {
                     let player = await client.Manager.get(interaction.guild_id);
                     
                     if (!member.voice.channel) return client.sendTime(interaction, "❌ | **You must be in a voice channel to use this command.**");
-                    if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+                    if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice  mới được dùng lệnh!**");
                     if (!player) return client.sendTime(interaction, "❌ | **Nothing is playing right now...**");
                     if (!player.queue.current.isSeekable) return client.sendTime(interaction, "❌ | **I'm not able to seek this song!**");
                     let SeekTo = client.ParseHumanTime(interaction.data.options[0].value);

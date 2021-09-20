@@ -19,9 +19,9 @@ module.exports = {
       */
     run: async (client, message, args, { GuildDB }) => {
       let player = await client.Manager.get(message.guild.id);
-      if (!player) return client.sendTime(message.channel, "❌ | **Đéo có bài nào...**");
-      if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi tao!**");
-      if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+      if (!player) return client.sendTime(message.channel, "❌ | **Không có bài nào...**");
+      if (!message.member.voice.channel) return client.sendTime(message.channel, "❌ | **Vào room voice rồi gọi !**");
+      if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return client.sendTime(message.channel, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
 
         if (player.queueRepeat) {
           player.setQueueRepeat(false)
@@ -45,9 +45,9 @@ module.exports = {
           const member = guild.members.cache.get(interaction.member.user.id);
           const voiceChannel = member.voice.channel;
           let awaitchannel = client.channels.cache.get(interaction.channel_id); /// thanks Reyansh for this idea ;-;
-            if (!player) return client.sendTime(interaction, "❌ | **Đéo có bài nào...**"); 
-            if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
-            if (guild.me.voice.channel && !guild.me.voice.channel.equals(voiceChannel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice của tao mới được dùng lệnh!**");
+            if (!player) return client.sendTime(interaction, "❌ | **Không có bài nào...**"); 
+            if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi.**");
+            if (guild.me.voice.channel && !guild.me.voice.channel.equals(voiceChannel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
 
             if(player.queueRepeat){
                   player.setQueueRepeat(false)

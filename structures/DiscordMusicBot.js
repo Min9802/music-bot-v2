@@ -158,7 +158,7 @@ class DiscordMusicBot extends Client {
           .setAuthor(`Đang phát ♪`, this.botconfig.IconURL)
           .setThumbnail(player.queue.current.displayThumbnail())
           .setDescription(`[${track.title}](${track.uri})`)
-          .addField("Thằng gọi tao", `${track.requester}`, true)
+          .addField("Thằng gọi tôi", `${track.requester}`, true)
           .addField(
             "Thời lượng",
             `\`${prettyMilliseconds(track.duration, {

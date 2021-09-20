@@ -22,7 +22,7 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Đéo có bài nào...**"
+        "❌ | **Không có bài nào...**"
       );
 
     let song = player.queue.current;
@@ -59,7 +59,7 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Đéo có bài nào...**"
+          "❌ | **Không có bài nào...**"
         );
 
       let song = player.queue.current;

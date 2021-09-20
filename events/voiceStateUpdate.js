@@ -47,7 +47,7 @@ module.exports = async (client, oldState, newState) => {
                 let emb = new MessageEmbed()
                     .setAuthor(`Resuming paused queue`, client.botconfig.IconURL)
                     .setColor("RANDOM")
-                    .setDescription(`A đm có người chơi với tao rồi. Tao phát nhạc cho mày nghe nè !!`);
+                    .setDescription(`A có người chơi với tôi rồi. Tôi phát nhạc cho bạn nghe nè !!`);
                 await client.channels.cache.get(player.textChannel).send(emb);
 
                 // update the now playing message and bring it to the front
