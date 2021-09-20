@@ -123,7 +123,7 @@ module.exports = {
             const member = guild.members.cache.get(interaction.member.user.id);
             const voiceChannel = member.voice.channel;
             let awaitchannel = client.channels.cache.get(interaction.channel_id); /// thanks Reyansh for this idea ;-;
-            if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
+            if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi.**");
             if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
             let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
             if (!CheckNode || !CheckNode.connected) {

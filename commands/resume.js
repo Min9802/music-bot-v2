@@ -40,7 +40,7 @@ module.exports = {
             const guild = client.guilds.cache.get(interaction.guild_id);
             const member = guild.members.cache.get(interaction.member.user.id);
 
-            if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi tao.**");
+            if (!member.voice.channel) return client.sendTime(interaction, "❌ | **Vào room voice rồi gọi.**");
             if (guild.me.voice.channel && !guild.me.voice.channel.equals(member.voice.channel)) return client.sendTime(interaction, ":x: | **Vào cùng room voice mới được dùng lệnh!**");
 
             let player = await client.Manager.get(interaction.guild_id);
