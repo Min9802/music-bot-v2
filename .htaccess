@@ -1,0 +1,12 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/quangbl4/music-bot.quangblue.com"
+PassengerBaseURI "/"
+PassengerNodejs "/home/quangbl4/nodevenv/music-bot.quangblue.com/14/bin/node"
+PassengerAppType node
+PassengerStartupFile index.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_HOST} !^www.music-bot.quangblue.com$ [NC]
+    RewriteRule ^(.*)$ https://www.music-bot.quangblue.com/$1 [L,R=301]
+</IfModule>
