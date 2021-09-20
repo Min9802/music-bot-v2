@@ -24,7 +24,7 @@ module.exports = {
         let SearchString = args.join(" ");
         if (!SearchString) return client.sendTime(message.channel, `**Usage - **\`${GuildDB.prefix}play [song]\``);
         let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
-        let Searching = await message.channel.send(":mag_right: Tao đang tìm...");
+        let Searching = await message.channel.send(":mag_right: tôi đang tìm...");
         if (!CheckNode || !CheckNode.connected) {
        return client.sendTime(message.channel,"❌ | **Server sập rồi. Gọi thằng Min fix**");
         }

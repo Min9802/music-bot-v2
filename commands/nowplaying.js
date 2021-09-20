@@ -30,7 +30,7 @@ module.exports = {
       .setAuthor("Đang phát", client.botconfig.IconURL)
       .setColor("RANDOM")
       .setDescription(`[${song.title}](${song.uri})`)
-      .addField("Thằng gọi tao", `${song.requester}`, true)
+      .addField("Thằng gọi tôi", `${song.requester}`, true)
       .addField(
         "Thời lượng",
         `${
@@ -67,7 +67,7 @@ module.exports = {
         .setAuthor("Đang phát", client.botconfig.IconURL)
         .setColor("RANDOM")
         .setDescription(`[${song.title}](${song.uri})`)
-        .addField("Thằng gọi tao", `${song.requester}`, true)
+        .addField("Thằng gọi tôi", `${song.requester}`, true)
         .addField(
           "Thời lượng",
           `${
