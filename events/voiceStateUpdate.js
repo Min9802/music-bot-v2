@@ -64,7 +64,7 @@ module.exports = async (client, oldState, newState) => {
                 let emb = new MessageEmbed()
                     .setAuthor(`Paused!`, client.botconfig.IconURL)
                     .setColor("RANDOM")
-                    .setDescription(`ĐM chúng mày bỏ tao lại 1 mình à !`);
+                    .setDescription(`Bỏ rơi t rồi !`);
                 await client.channels.cache.get(player.textChannel).send(emb);
             }
             break;
